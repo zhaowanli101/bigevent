@@ -10,15 +10,15 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/main.css">
-    <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/lib/jquery-1.12.4.min.js"></script>
 </head>
 
 <body>
     <div class="sider">
-        <a href="#" class="logo"><img src="images/logo02.png" alt="logo"></a>
+        <a  href="javascript:;" class="logo"><img src="images/logo02.png" alt="logo"></a>
         <div class="user_info">
-            <img src="images/2.jpg" alt="person">
-            <span>欢迎&nbsp;&nbsp;李思思</span>
+            <img class="userImg" src="images/2.jpg" alt="person">
+            <span>欢迎&nbsp;&nbsp; <i id="userNa" style="font-style: normal"></i></span>
             <b>管理员</b>
         </div>
         <div class="menu">
@@ -43,8 +43,8 @@
         </form>
         <div class="user_center_link">
             <a href="user.html" onclick="setMenu(3,0)" target="main_frame">个人中心</a>
-            <img src="images/2.jpg" alt="person">
-            <a href="#"><i class="iconfont icon-tuichu"></i> 退出</a>
+            <img class="userImg" src="images/2.jpg" alt="person">
+            <a id="userLogOut" href="javascript:;"><i class="iconfont icon-tuichu"></i> 退出</a>
         </div>
     </div>
 
@@ -52,6 +52,28 @@
         <iframe src="main_count.html" frameborder="0" id="main_frame" name="main_frame" frameborder="0" scrolling="auto"></iframe>
     </div>
 
+
+
+    <div class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">退出提示</h4>
+          </div>
+          <div class="modal-body">
+            <p id="pResult">您是要退出么</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button id="logoutTO" type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
 
     <script>
@@ -102,6 +124,37 @@
            }
         }
 
+    </script>
+    <script src="./js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./js/utils/user.js"></script>
+    <script>
+        //进入页面就更换管理员信息,利用入口函数
+    $(function(){       
+        user.getInfo(function(res){
+            if(res.code === 200){
+                $("#userNa").text(res.data.nickname);
+                $(".userImg").prop("src", res.data.user_pic);
+            }
+        })
+    })
+    
+    //管理员退出
+    $("#userLogOut").click(function(){
+        $('.modal').modal('show');
+    })
+    
+    //点击确认退出
+    $("#logoutTO").click(function(){
+        user.logout(function(res){
+            if(res.code === 200){
+                window.location.href = "http://127.0.0.1:5500/login.html"
+            }
+        })
+    })
+
+    
+    
+    
     </script>
 
 </body>
