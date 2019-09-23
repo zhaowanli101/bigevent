@@ -59,10 +59,10 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">退出提示</h4>
+            <h4 class="modal-title">温馨提示</h4>
           </div>
           <div class="modal-body">
-            <p id="pResult">您是要退出么</p>
+            <p id="pResult">您确定要退出么</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -125,9 +125,11 @@
         }
 
     </script>
+    <script src="./js/utils/config.js"></script>
     <script src="./js/bootstrap/js/bootstrap.min.js"></script>
     <script src="./js/utils/user.js"></script>
     <script>
+        console.log(window)
         //进入页面就更换管理员信息,利用入口函数
     $(function(){       
         user.getInfo(function(res){

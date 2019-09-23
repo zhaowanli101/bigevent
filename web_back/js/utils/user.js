@@ -3,7 +3,7 @@ var user = {
     //管理员登录
     login: function(userName,userPassword,callback){
         $.ajax({
-            url: "http://localhost:8000/admin/login",
+            url: login_url,
             type: "post",
             data:{user_name: userName , password: userPassword},
             success:function(res){
@@ -15,7 +15,7 @@ var user = {
     //获取管理员信息
     getInfo:function(callback){
         $.ajax({
-            url:"http://localhost:8000/admin/getuser",
+            url:logInfo_url,
             type:"get",
             success: function(res){
                 callback(res);    
@@ -27,7 +27,7 @@ var user = {
     //管理员退出
     logout:function(callback){
         $.ajax({
-            url:"http://localhost:8000/admin/logout",
+            url:logout_url,
             type:"post",
             success:function(res){
                 callback(res);   
